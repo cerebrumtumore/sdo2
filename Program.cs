@@ -1,3 +1,16 @@
+using Microsoft.AspNetCore.StaticFiles.Infrastructure;
+sweetshopRepository repo = new sweetshopRepository();
+var builder = WebApplication.CreateBuilder(args);
+
+var app = builder.Build();
+
+app.MapGet("/sweetshop/{id}", (Guid id) => repo.Read(id));
+app.MapGet("/sweetshop/readAll", () => repo.ReadAll());
+app.MapPost("/sweetshop/create", (sweetshop sweet) => repo.Create(sweet));
+app.MapPost("/sweetshop/delete/{id}", (Guid id) => repo.Delete(id));
+
+app.Run();
+
 
 class sweetshop
 {
