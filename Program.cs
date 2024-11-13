@@ -26,3 +26,41 @@ class sweetshop
     public int Price { get => price; set => price = value; }
 }
 
+class sweetshopRepository
+{
+    public List<sweetshop> sweetshops { get; set; }
+
+    public sweetshopRepository()
+    {
+        sweetshops = new List<sweetshop>();
+    }
+
+    public void Create(sweetshop sweet)
+    {
+        sweetshops.Add(sweet);
+    }
+
+
+    public sweetshop Read(Guid id)
+    {
+        for (int i = 0; i < sweetshops.Count; i++)
+        {
+            if (sweetshops[i].Id == id)
+            {
+                return sweetshops[i];
+            }
+        }
+        throw new Exception("мер");
+
+    }
+
+    public List<sweetshop> ReadAll()
+    {
+        return sweetshops;
+    }
+
+    public void Delete(Guid id)
+    {
+        sweetshops.Remove(Read(id));
+    }
+}
